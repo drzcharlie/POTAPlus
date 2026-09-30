@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "POTAPlus Hunter Beta",
+  "version": "0.36.6",
+  "description": "POTAPlus Hunter Beta with corrected ITU-R P.533 dB(kW) transmit-power input, POTA.app-driven band/mode filtering, user TX power, live solar conditions, and persistent prediction details.",
+  "permissions": [
+    "storage",
+    "geolocation"
+  ],
+  "host_permissions": [
+    "https://pota.app/*",
+    "https://api.pota.app/*",
+    "https://services.swpc.noaa.gov/*",
+    "https://openhamclock.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pota.app/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  }
+}
